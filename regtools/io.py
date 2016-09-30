@@ -37,6 +37,8 @@ def read_metadata_fei(filename):
                 if line and line != '\x00':  # ignore blank lines
                     key, val = line.split('=')
                     md[current_tag][key] = val
+    if not md['root'] and len(md) == 1:
+        raise ValueError('Input file %s contains no FEI metadata.' % filename)
     return md
 
 

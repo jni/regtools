@@ -11,7 +11,7 @@ Tests for `regtools` module.
 import pytest
 
 
-from regtools import regtools
+from regtools import io
 
 
 class TestRegtools(object):

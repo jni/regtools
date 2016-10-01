@@ -23,3 +23,8 @@ def test_tiff_metadata():
     md = io.read_metadata_tiff(os.path.join(datadir, 'dstorm1.tif'))
     assert 'x_resolution' in md
     assert_approx_equal(md['x_resolution'], 1e-8)
+
+
+def test_incorrect_metadata_file_type():
+    input_file = os.path.join(datadir, 'dstorm1.tif')
+    assert_raises(ValueError, io.read_metadata_fei, input_file)

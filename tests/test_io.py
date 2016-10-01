@@ -48,3 +48,12 @@ def test_imread_dstorm():
     assert_equal(dstorm.shape, (2048, 2048))
     assert 'x_resolution' in dstormmd
     assert_approx_equal(dstormmd['x_resolution'], 1e-8)
+
+
+def test_imread_mdfunction():
+    """Test whether manual mdfunction passing."""
+    sem_fn = os.path.join(datadir, 'sem1.tif')
+    sem, semmd = io.imread_with_metadata(sem_fn,
+                                         mdfunction=io.read_metadata_fei)
+    assert sem.dtype == 'uint16'
+    assert 'root' in semmd

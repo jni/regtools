@@ -89,10 +89,13 @@ def imread_with_metadata(filename, *, mdfunction=None):
         The metadata.
     """
     im = io.imread(filename)
-    try:
-        md = read_metadata_fei(filename)
-    except ValueError as err:
-        if 'FEI' not in err.args[0]:
-            raise err
-        md = read_metadata_tiff(filename)
+    if mdfunction is not None:
+        md = mdfunction(filename)
+    else:  # try to infer automatically
+        try:
+            md = read_metadata_fei(filename)
+        except ValueError as err:
+            if 'FEI' not in err.args[0]:
+                raise err
+            md = read_metadata_tiff(filename)
     return im, md

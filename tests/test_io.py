@@ -12,7 +12,7 @@ datadir = os.path.join(rundir, 'data')
 
 def test_fei_metadata():
     md = io.read_metadata_fei(os.path.join(datadir, 'sem1.tif'))
-    assert_equal(len(md), 18)
+    assert len(md) == 18
     assert 'root' in md
     assert 'Date' in md['root']
     assert_equal(md['root']['Date'], '08/02/2016')
